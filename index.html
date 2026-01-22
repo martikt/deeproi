@@ -8,21 +8,45 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="index.html">
-        <img src="assets/logo.png" alt="DeepROI logo" class="logo">
-        <span>DeepROI</span>
-      </a>
-      <nav class="nav">
-        <a href="index.html#services">Palvelut</a>
-        <a href="index.html#process">Prosessi</a>
-        <a href="index.html#faq">UKK</a>
-        <a href="miksi-sain-tekstiviestin.html">Miksi sain tekstiviestin?</a>
-        <a href="index.html#contact" class="cta">Aloita</a>
-      </nav>
+  <header class="site-header" role="banner">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="DeepROI logo" class="logo">
+      <span>DeepROI</span>
+    </a>
+
+    <!-- Desktop nav (visible on wide screens) -->
+    <nav class="nav" role="navigation" aria-label="Päävalikko">
+      <a href="index.html#services">Palvelut</a>
+      <a href="index.html#process">Prosessi</a>
+      <a href="index.html#faq">UKK</a>
+      <a href="miksi-sain-tekstiviestin.html">Miksi sain tekstiviestin?</a>
+      <a href="index.html#contact" class="cta">Aloita</a>
+    </nav>
+
+    <!-- Mobile controls -->
+    <button class="mobile-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Avaa valikko">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="#0b84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <!-- Mobile menu (overlay) -->
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu-inner" role="menu">
+        <button class="mobile-close" aria-label="Sulje valikko">&times;</button>
+        <nav class="mobile-nav" role="navigation" aria-label="Mobiilivalikko">
+          <a role="menuitem" href="index.html#services">Palvelut</a>
+          <a role="menuitem" href="index.html#process">Prosessi</a>
+          <a role="menuitem" href="index.html#faq">UKK</a>
+          <a role="menuitem" href="miksi-sain-tekstiviestin.html">Miksi sain tekstiviestin?</a>
+          <a role="menuitem" href="index.html#contact" class="cta">Aloita</a>
+        </nav>
+      </div>
+      <div class="mobile-backdrop" data-close="true"></div>
     </div>
-  </header>
+  </div>
+</header>
 
   <main id="home">
     <section class="hero wrap">
