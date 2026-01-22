@@ -20,15 +20,38 @@ a:hover{text-decoration:underline}
 
 /* Header / navigation */
 .site-header{background:transparent;position:sticky;top:0;z-index:120}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .brand .logo{height:48px;width:48px;object-fit:contain}
 .brand span{font-weight:700;letter-spacing:0.2px}
+
+/* Desktop nav */
 .nav{display:flex;align-items:center;gap:6px}
 .nav a{margin-left:18px;text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-weight:600}
 .nav a.cta{background:var(--accent);color:white;padding:8px 14px;border-radius:10px}
+
+/* Mobile toggle button (hidden on desktop) */
+.mobile-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
+.mobile-toggle svg{display:block}
+.mobile-toggle:focus{outline:3px solid color-mix(in srgb, var(--accent) 22%, transparent);outline-offset:2px}
+
+/* Mobile menu overlay (hidden by default) */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:200}
+.mobile-menu-inner{position:fixed;top:0;right:0;height:100%;width:min(92vw,360px);background:var(--card);box-shadow:-10px 0 40px rgba(10,20,40,.12);padding:20px;overflow:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.9,.2,1)}
+.mobile-menu.open .mobile-menu-inner{transform:translateX(0)}
+.mobile-backdrop{position:fixed;inset:0;background:rgba(10,20,40,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.mobile-menu.open .mobile-backdrop{opacity:1;pointer-events:auto}
+.mobile-close{background:transparent;border:0;font-size:28px;line-height:1;position:absolute;top:14px;right:16px;cursor:pointer}
+.mobile-nav{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+.mobile-nav a{display:block;padding:12px 14px;border-radius:8px;text-decoration:none;color:var(--text);font-weight:700}
+.mobile-nav a.cta{background:var(--accent);color:white;text-align:center}
+
+/* Header layout tweaks */
 @media (max-width:800px){
   .nav{display:none}
+  .mobile-toggle{display:inline-flex;align-items:center}
+  .header-inner{gap:8px}
+  .brand .logo{height:40px;width:40px}
 }
 
 /* Hero */
@@ -41,16 +64,10 @@ a:hover{text-decoration:underline}
 .kpis strong{color:var(--accent);font-weight:700}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 
-/* Buttons */
-.btn{display:inline-block;text-decoration:none;border-radius:10px;padding:10px 16px;border:1px solid transparent;cursor:pointer;font-weight:600}
-.btn.primary{background:var(--accent);color:white;border-color:var(--accent);box-shadow:var(--shadow-1)}
-.btn.ghost{background:transparent;border:1px solid rgba(13,40,80,0.06);color:var(--text)}
-.btn:focus{outline:3px solid color-mix(in srgb, var(--accent) 22%, transparent);outline-offset:2px}
-
-/* Mockup */
+/* Ensure phone mockup text is white */
 .mockup .phone{width:220px;height:420px;border-radius:22px;background:linear-gradient(180deg,#ffffff,#f1f6fb);box-shadow:var(--shadow-2);display:flex;align-items:center;justify-content:center}
 .phone-screen{width:80%;height:70%;background:linear-gradient(180deg,#0b84ff 0%,#6fb1ff 100%);border-radius:12px;color:white;padding:14px;text-align:center}
-.phone-screen h3{margin:0;font-size:14px;font-weight:600;color:rgba(255,255,255,0.98)} /* ensure white text */
+.phone-screen h3{margin:0;font-size:14px;font-weight:600;color:rgba(255,255,255,0.98)}
 .phone-screen .big{font-size:40px;margin:8px 0;font-weight:700;color:white}
 .phone-screen .small{font-size:13px;opacity:0.95;color:rgba(255,255,255,0.95)}
 
@@ -124,7 +141,6 @@ a:focus, button:focus, input:focus, textarea:focus{outline-offset:3px}
 @media (max-width:800px){
   .hero{flex-direction:column}
   .contact-grid{grid-template-columns:1fr}
-  .nav{display:none}
   main.wrap > .card{margin:20px 8px;padding:20px}
   .brand .logo{height:40px;width:40px}
   .phone-screen .big{font-size:34px}
