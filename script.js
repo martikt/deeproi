@@ -1,74 +1,71 @@
-// Mobile menu toggle + basic accessibility
+/* Mobile menu toggle + robust accessibility and pointer support */
 document.addEventListener('DOMContentLoaded', function() {
-  const toggle = document.querySelector('.mobile-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileClose = document.querySelector('.mobile-close');
-  const backdrop = document.querySelector('.mobile-backdrop');
+  try {
+    const toggle = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.querySelector('.mobile-close');
+    const backdrop = document.querySelector('.mobile-backdrop');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
 
-  function openMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.add('open');
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    toggle.setAttribute('aria-expanded', 'true');
-    // focus first link
-    const firstLink = mobileMenu.querySelector('.mobile-nav a');
-    if (firstLink) firstLink.focus();
-    document.body.style.overflow = 'hidden'; // prevent background scroll
-  }
-  function closeMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.remove('open');
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.focus();
-    document.body.style.overflow = ''; // restore
-  }
-
-  if (toggle) {
-    toggle.addEventListener('click', function(){
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      if (expanded) closeMenu(); else openMenu();
-    });
-  }
-  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
-  if (backdrop) backdrop.addEventListener('click', closeMenu);
-
-  // Close with Escape
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
-      closeMenu();
+    function openMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      const firstLink = mobileMenu.querySelector('.mobile-nav a');
+      if (firstLink) firstLink.focus();
+      document.body.style.overflow = 'hidden';
     }
-  });
+    function closeMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      if (toggle) toggle.focus();
+      document.body.style.overflow = '';
+    }
 
-  // Close menu when any mobile link is clicked (and navigate)
-  document.querySelectorAll('.mobile-nav a').forEach(a=>{
-    a.addEventListener('click', function(){
-      closeMenu();
-    });
-  });
+    if (toggle) {
+      toggle.addEventListener('click', function(e){ e.preventDefault(); const expanded = this.getAttribute('aria-expanded') === 'true'; if (expanded) closeMenu(); else openMenu(); });
+      toggle.addEventListener('pointerdown', function(e){ e.preventDefault(); });
+    }
+    if (mobileClose) {
+      mobileClose.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); });
+    }
+    if (backdrop) {
+      backdrop.addEventListener('click', function(e){ closeMenu(); });
+    }
 
-  // Smooth scroll for internal anchor links (existing behavior)
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      const href = this.getAttribute('href');
-      if (!href || href === '#' || href.indexOf('http') === 0) return;
-      const target = document.querySelector(href);
-      if (target){
-        e.preventDefault();
-        target.scrollIntoView({behavior:'smooth',block:'start'});
-        // If mobile, close menu
-        if (mobileMenu && mobileMenu.classList.contains('open')) closeMenu();
+    // Escape closes menu
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
+        closeMenu();
       }
     });
-  });
 
-  // Accessibility: trap focus inside mobile menu when open (simple)
-  document.addEventListener('focusin', (e) => {
-    if (!mobileMenu || !mobileMenu.classList.contains('open')) return;
-    if (!mobileMenu.contains(e.target) && e.target !== toggle) {
-      // move focus to menu
-      const first = mobileMenu.querySelector('.mobile-nav a');
-      if (first) first.focus();
+    // Close menu when clicking a mobile link (so it navigates cleanly)
+    if (mobileNavLinks && mobileNavLinks.length) {
+      mobileNavLinks.forEach(a => {
+        a.addEventListener('click', function(ev){
+          setTimeout(closeMenu, 120);
+        });
+      });
     }
-  });
+
+    // Smooth scroll for internal anchors
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var href = this.getAttribute('href');
+        if (!href || href === '#' || href.indexOf('http') === 0) return;
+        var target = document.querySelector(href);
+        if (target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+          if (mobileMenu && mobileMenu.classList.contains('open')) closeMenu();
+        }
+      });
+    });
+  } catch (err) {
+    console.error('Menu script error:', err);
+  }
 });
