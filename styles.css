@@ -1,3 +1,4 @@
+/* Täysi styles.css - sisältää header, mobiilimenu, napit ja miksi-sivu-tyylit */
 :root{
   --max-width:1100px;
   --accent:#0b84ff;
@@ -30,13 +31,19 @@ a:hover{text-decoration:underline}
 .nav a{margin-left:18px;text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-weight:600}
 .nav a.cta{background:var(--accent);color:white;padding:8px 14px;border-radius:10px}
 
-/* Mobile toggle button (hidden on desktop) */
+/* Button base (used site-wide) */
+.btn{display:inline-block;text-decoration:none;border-radius:10px;padding:10px 16px;border:1px solid transparent;cursor:pointer;font-weight:700;text-align:center}
+.btn.primary{background:var(--accent);color:white;border-color:var(--accent);box-shadow:var(--shadow-1)}
+.btn.ghost{background:transparent;border:1px solid rgba(13,40,80,0.06);color:var(--text)}
+
+/* Mobile toggle button */
 .mobile-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
 .mobile-toggle svg{display:block}
 .mobile-toggle:focus{outline:3px solid color-mix(in srgb, var(--accent) 22%, transparent);outline-offset:2px}
 
-/* Mobile menu overlay (hidden by default) */
-.mobile-menu{display:none;position:fixed;inset:0;z-index:200}
+/* Mobile menu overlay */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:200;pointer-events:none}
+.mobile-menu.open{display:block;pointer-events:auto}
 .mobile-menu-inner{position:fixed;top:0;right:0;height:100%;width:min(92vw,360px);background:var(--card);box-shadow:-10px 0 40px rgba(10,20,40,.12);padding:20px;overflow:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.9,.2,1)}
 .mobile-menu.open .mobile-menu-inner{transform:translateX(0)}
 .mobile-backdrop{position:fixed;inset:0;background:rgba(10,20,40,.35);opacity:0;transition:opacity .28s;pointer-events:none}
@@ -46,7 +53,7 @@ a:hover{text-decoration:underline}
 .mobile-nav a{display:block;padding:12px 14px;border-radius:8px;text-decoration:none;color:var(--text);font-weight:700}
 .mobile-nav a.cta{background:var(--accent);color:white;text-align:center}
 
-/* Header layout tweaks */
+/* Responsiivisuus */
 @media (max-width:800px){
   .nav{display:none}
   .mobile-toggle{display:inline-flex;align-items:center}
@@ -54,7 +61,7 @@ a:hover{text-decoration:underline}
   .brand .logo{height:40px;width:40px}
 }
 
-/* Hero */
+/* Muita tyylejä (hero, cards, contact, faq, miksi-sivu) */
 .hero{display:flex;gap:30px;align-items:center;padding:40px 0}
 .hero-left{flex:1}
 .hero-right{flex:1;display:flex;align-items:center;justify-content:center}
@@ -64,91 +71,28 @@ a:hover{text-decoration:underline}
 .kpis strong{color:var(--accent);font-weight:700}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 
-/* Ensure phone mockup text is white */
+/* Mockup text white */
 .mockup .phone{width:220px;height:420px;border-radius:22px;background:linear-gradient(180deg,#ffffff,#f1f6fb);box-shadow:var(--shadow-2);display:flex;align-items:center;justify-content:center}
 .phone-screen{width:80%;height:70%;background:linear-gradient(180deg,#0b84ff 0%,#6fb1ff 100%);border-radius:12px;color:white;padding:14px;text-align:center}
 .phone-screen h3{margin:0;font-size:14px;font-weight:600;color:rgba(255,255,255,0.98)}
 .phone-screen .big{font-size:40px;margin:8px 0;font-weight:700;color:white}
 .phone-screen .small{font-size:13px;opacity:0.95;color:rgba(255,255,255,0.95)}
 
-/* Services / cards */
+/* Services / cards / faq / contact / miksi-sivu styles (kevyet, skaalautuvat) */
 .services{padding:30px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:16px}
 .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);display:flex;flex-direction:column;gap:8px}
-.card h3{margin:0 0 6px}
-
-/* Process */
 .process{background:transparent;padding:30px 0}
 .process ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;list-style:none;padding:0}
-.process ol li{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;box-shadow:var(--shadow-1)}
-
-/* FAQ */
 .faq{padding:30px 0}
 .qa details{margin-bottom:8px;background:var(--card);padding:12px;border-radius:8px;box-shadow:var(--shadow-1)}
-.qa summary{cursor:pointer;font-weight:600}
-
-/* Contact */
 .contact{padding:30px 0}
 .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
 .contact-form{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 24px rgba(10,20,40,.04)}
-.contact-form label{display:block;margin-bottom:10px;font-size:14px;color:var(--muted)}
-.contact-form input,.contact-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;margin-top:6px;font-size:15px}
-.contact-form input:focus,.contact-form textarea:focus{outline:3px solid color-mix(in srgb, var(--accent) 20%, transparent);outline-offset:2px}
-.form-row{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
 .contact-info{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow-1)}
-.contact-info h3{margin-top:0}
-.contact-info p{margin:6px 0;color:var(--muted);font-size:15px}
-
-/* Footer */
-.site-footer{padding:24px 0;background:transparent}
-.site-footer p{margin:6px 0;color:var(--muted);font-size:14px}
-
-/* Styles for the new "Miksi sain tekstiviestin?" page */
-main.wrap > .card{
-  max-width:900px;
-  margin:40px auto;
-  padding:32px;
-  font-size:17px;
-  line-height:1.6;
-  border-radius:14px;
-  box-shadow:var(--shadow-2);
-  background:var(--card);
-}
-main.wrap > .card h1{font-size:28px;margin:0 0 12px}
-main.wrap > .card h3{font-size:18px;margin:12px 0 8px}
-main.wrap > .card p{color:var(--text);margin:0 0 12px}
-main.wrap > .card ul{margin:10px 0 16px;padding-left:20px}
-main.wrap > .card li{margin:8px 0;color:var(--muted)}
-
-/* Subtle de-emphasized note (used for the STOP text) */
+main.wrap > .card{max-width:900px;margin:40px auto;padding:32px;font-size:17px;line-height:1.6;border-radius:14px;box-shadow:var(--shadow-2);background:var(--card)}
 .muted-note{color:var(--muted);font-size:13px;margin-top:10px;opacity:0.9}
 
-/* Utility and typography */
-h1,h2,h3{color:var(--text);line-height:1.15}
-p{margin:0 0 12px}
-ul{margin:0 0 12px;padding-left:1.2rem}
-strong{color:var(--text)}
-small{color:var(--muted)}
-
-/* Accessibility & focus states */
-a:focus, button:focus, input:focus, textarea:focus{outline-offset:3px}
-
-/* Responsive */
-@media (max-width:1000px){
-  .wrap{padding:28px 18px}
-  .hero{gap:18px}
-}
-@media (max-width:800px){
-  .hero{flex-direction:column}
-  .contact-grid{grid-template-columns:1fr}
-  main.wrap > .card{margin:20px 8px;padding:20px}
-  .brand .logo{height:40px;width:40px}
-  .phone-screen .big{font-size:34px}
-}
-
-/* Tiny print styles (optional) */
-@media print{
-  .site-header,.nav,.hero-cta,.form-row,.contact-form, .btn{display:none}
-  .wrap{padding:10px}
-  main.wrap > .card{box-shadow:none}
-}
+/* Pieniä säätöjä mobiilissa */
+@media (max-width:1000px){ .wrap{padding:28px 18px} .hero{gap:18px} }
+@media (max-width:800px){ .hero{flex-direction:column} .contact-grid{grid-template-columns:1fr} main.wrap>.card{margin:20px 8px;padding:20px} .brand .logo{height:40px;width:40px} .phone-screen .big{font-size:34px} }
