@@ -4,23 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Miksi sain tekstiviestin? — DeepROI</title>
-  <meta name="description" content="Selitys miksi sait tekstiviestin DeepROI:ltä ja mitä voit tehdä seuraavaksi." />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
+  <!-- Sama header kuin indexissä (korvaa header-lohko myös tässä tiedostossa) -->
+  <header class="site-header" role="banner">
+    <div class="wrap header-inner">
       <a class="brand" href="index.html">
         <img src="assets/logo.png" alt="DeepROI logo" class="logo">
         <span>DeepROI</span>
       </a>
-      <nav class="nav">
+
+      <nav class="nav" role="navigation" aria-label="Päävalikko">
         <a href="index.html#services">Palvelut</a>
         <a href="index.html#process">Prosessi</a>
         <a href="index.html#faq">UKK</a>
         <a href="miksi-sain-tekstiviestin.html">Miksi sain tekstiviestin?</a>
         <a href="index.html#contact" class="cta">Aloita</a>
       </nav>
+
+      <button class="mobile-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Avaa valikko">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="#0b84ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+
+      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-inner" role="menu">
+          <button class="mobile-close" aria-label="Sulje valikko" type="button">&times;</button>
+          <nav class="mobile-nav" role="navigation" aria-label="Mobiilivalikko">
+            <a role="menuitem" href="index.html#services">Palvelut</a>
+            <a role="menuitem" href="index.html#process">Prosessi</a>
+            <a role="menuitem" href="index.html#faq">UKK</a>
+            <a role="menuitem" href="miksi-sain-tekstiviestin.html">Miksi sain tekstiviestin?</a>
+            <a role="menuitem" href="index.html#contact" class="cta btn primary">Aloita</a>
+          </nav>
+        </div>
+        <div class="mobile-backdrop" data-close="true"></div>
+      </div>
     </div>
   </header>
 
@@ -52,7 +73,6 @@
     <div class="wrap">
       <p>&copy; DeepROI — SEO &amp; markkinointi kuntosaleille</p>
       <p>Y-tunnus: 3576018-1</p>
-      <p><a href="https://docs.google.com/document/d/1_i1Q3mW7oYCZleFnRiUW_pcz-mfiEoeQDPk5EMYRS3g/edit?usp=sharing" target="_blank">Tietosuoja- ja yksityisyyskäytäntö</a></p>
     </div>
   </footer>
 
